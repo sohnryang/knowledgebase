@@ -62,7 +62,7 @@ r_n &= r_{n - 2} - q_n \cdot r_{n - 1} \\
 0 &= r_{n - 1} - q_{n + 1} \cdot r_n
 \end{align*}
 $$
-그렇다면, $r_i$ 값들이 어떤 integer combination인지를 추적하면 방정식을 풀 수도 있을 것이다. $r_i = a \cdot s_i + b \cdot t_i$가 되도록 $s_i, t_i$를 정의하면, $r_i$와 정확히 같은 점화식을 $s_i, t_i$에 대해 사용할 때 방정식을 풀 수 있을 것이다. 이 아이디어를 코드로 구현하면 다음과 같다.
+그렇다면, $r_i$ 값들이 어떤 integer combination인지를 추적하면 방정식을 풀 수도 있을 것이다. $r_i = a \cdot s_i + b \cdot t_i$가 되도록 $s_i, t_i$를 정의하면, $r_i$와 정확히 같은 점화식을 $s_i, t_i$에 대해 사용할 때 방정식을 풀 수 있을 것이다. 이 아이디어를 코드로 구현하면 다음과 같다.
 
 ```python
 def xgcd(a, b):
@@ -81,7 +81,7 @@ def xgcd(a, b):
 
 이 방정식은 Bézout's identity라고도 부르고, modulo inverse를 구하는 데에 사용할 수 있다.
 
-$\operatorname{gcd}(a, b) = 1$이고, $\text{mod}\; b$에서 $a$의 modulo inverse가 $x$라 할 때 어떤 수 $y$에 대해 $ax + by = 1$이기 때문이다.
+$\operatorname{gcd}(a, b) = 1$이고, $\text{mod}\; b$에서 $a$의 modulo inverse가 $x$라 할 때 어떤 수 $y$에 대해 $ax + by = 1$이기 때문이다.
 
 ## Fermat's Little Theorem
 
@@ -90,7 +90,25 @@ $$
 a^p \equiv a \quad (\text{mod}\; p)
 $$
 
-## Euler's $\phi$
+## Euler's $\varphi$
+
+Euler's totient function, $\varphi(n)$은 $1 \leq k \leq n$인 $k$ 중에서 $n$과 coprime인 것의 개수를 세는 함수이다.
+
+$\varphi(n)$은 multiplicative function이고, coprime $n, m$에 대해 다음이 성립한다.
+$$
+\varphi(nm) = \varphi(n) \varphi(m)
+$$
+조금 더 일반화하면 다음과 같이 쓸 수도 있다.
+$$
+\varphi(n)
+= n \prod_{p | n} \left( 1 - \frac{1}{p} \right)
+= p_1^{k_1 - 1} (p_1 - 1) p_2^{k_2 - 1} (p_2 - 1) \dots p_r^{k_r - 1} (p_r - 1)
+$$
+또한 Fermat's little theorem과 같이, Euler's formula를 다음과 같이 쓸 수 있다. $a$와 $n$이 coprime일 때,
+$$
+a^{\varphi(n)} \equiv 1 \quad (\text{mod}\; n)
+$$
+Textbook RSA에서 이 사실이 사용된다.
 
 ## Chinese Remainder Theorem
 
